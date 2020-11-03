@@ -248,6 +248,7 @@ def make_test_region_obj(name, m_s3, m_boto, role_name=""):
         s3_bucket=s3,
         parameters={},
         _role_name=role_name,
+	_role_arn=arn:aws:iam::123456789012:role/test-role
     )
     region.s3_bucket = s3
     return region

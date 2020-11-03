@@ -149,6 +149,10 @@
                     "description": "Role name to use when launching CFN Stacks.",
                     "type": "string"
                 },
+                "role_arn": {
+                    "description": "Role arn to use when launching CFN Stacks.",
+                    "type": "string"
+                },
                 "s3_bucket": {
                     "description": "Name of S3 bucket to upload project to, if left out a bucket will be auto-generated",
                     "pattern": "^[a-z0-9-]*$",

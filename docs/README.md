@@ -122,6 +122,8 @@ taskcat has several configuration files which can be used to set behaviors in a 
     * `parameters` _Parameter key-values to pass to CloudFormation, parameters provided in global config take precedence_
         * `<PARAMETER_NAME>`
     * `regions` _List of AWS regions_
+    * `role_name` _Name of an IAM role to deploy the cloudformation with. Must be in the same account as the one you are running taskcat in_
+    *`role_arn` _Full ARN of an IAM role to deploy the cloudformation with. This parameter will be ignored if role_name is present. This option may be used to deploy resources in other accounts. No error checking is done USE WITH CAUTION._
     * `s3_bucket` _Name of S3 bucket to upload project to, if left out a bucket will be auto-generated_
     * `s3_enable_sig_v2` _Enable (deprecated) sigv2 access to auto-generated buckets_
     * `s3_object_acl` _ACL for uploaded s3 objects, defaults to 'private'_

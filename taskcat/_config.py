@@ -242,6 +242,7 @@ class Config:
                     _boto3_cache=boto3_cache,
                     taskcat_id=self.uid,
                     _role_name=test.role_name,
+                    _role_arn=test.role_arn,
                 )
         return region_objects
 

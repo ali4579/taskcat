@@ -72,6 +72,7 @@ METADATA = {
         "description": "Shorten stack names generated for tests, set to true to enable"
     },
     "role_name": {"description": "Role name to use when launching CFN Stacks."},
+    "role_arn": {"description": "Role arn to use when launching CFN Stacks."},
 }
 
 # types
@@ -178,6 +179,7 @@ class RegionObj:
     taskcat_id: UUID
     _boto3_cache: Boto3Cache
     _role_name: Optional[str]
+    _role_arn: Optional[str]
 
     def client(self, service: str):
         return self._boto3_cache.client(service, region=self.name, profile=self.profile)
@@ -190,6 +192,8 @@ class RegionObj:
     def role_arn(self):
         if self._role_name:
             return f"arn:{self.partition}:iam::{self.account_id}:role/{self._role_name}"
+        if self._role_arn:
+            return f"{self._role_arn}"
         return None
 
 
@@ -454,6 +458,8 @@ class TestConfig(JsonSchemaMixin, allow_additional_props=False):  # type: ignore
         default=None, metadata=METADATA["az_ids"]
     )
     role_name: Optional[str] = field(default=None, metadata=METADATA["role_name"])
+    role_arn: Optional[str] = field(default=None, metadata=METADATA["role_arn"])
+
 
 
 # pylint: disable=too-many-instance-attributes
@@ -505,6 +511,8 @@ class ProjectConfig(JsonSchemaMixin, allow_additional_props=False):  # type: ign
         default=None, metadata=METADATA["shorten_stack_name"]
     )
     role_name: Optional[str] = field(default=None, metadata=METADATA["role_name"])
+    role_arn: Optional[str] = field(default=None, metadata=METADATA["role_arn"])
+
 
 
 PROPAGATE_KEYS = ["tags", "parameters", "auth"]
