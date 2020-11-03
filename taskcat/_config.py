@@ -234,6 +234,8 @@ class Config:
                     if test.auth
                     else "default"
                 )
+                LOG.info(f"in get_regions {test.role_name}")
+
                 region_objects[test_name][region] = RegionObj(
                     name=region,
                     account_id=boto3_cache.account_id(profile),

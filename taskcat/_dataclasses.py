@@ -191,6 +191,7 @@ class RegionObj:
     @property
     def role_arn(self):
         if self._role_name:
+            LOG.info(f"in dataclasses {self._role_name}")
             return f"arn:{self.partition}:iam::{self.account_id}:role/{self._role_name}"
         if self._role_arn:
             return f"{self._role_arn}"
