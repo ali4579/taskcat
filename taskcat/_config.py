@@ -245,8 +245,8 @@ class Config:
                     profile=profile,
                     _boto3_cache=boto3_cache,
                     taskcat_id=self.uid,
-                    _role_name=self.project.role_name,
-                    _role_arn=self.project.role_arn,
+                    _role_name=self.config.project.role_name,
+                    _role_arn=self.config.project.role_arn,
                 )
 
         LOG.info(f"config.py in get_regions {region_objects}")
