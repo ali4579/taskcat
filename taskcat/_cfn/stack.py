@@ -324,7 +324,7 @@ class Stack:  # pylint: disable=too-many-instance-attributes
         if region.role_arn:
             create_options["RoleARN"] = region.role_arn
             LOG.warning(
-                f"Found role {role_arn}"
+                f"Found role {region.role_arn}"
             )
         stack_id = cfn_client.create_stack(**create_options)["StackId"]
         stack = cls(region, stack_id, template, test_name, uuid)
