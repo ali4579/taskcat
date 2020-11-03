@@ -209,7 +209,7 @@ class Stack:  # pylint: disable=too-many-instance-attributes
         self.completion_time: timedelta = timedelta(0)
         self.role_arn = region.role_arn
         LOG.info(
-            f"bring out your dead!"
+            f"bring out your dead! {role_arn}"
         )
 
         # properties from additional cfn api calls
