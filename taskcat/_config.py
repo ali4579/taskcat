@@ -236,7 +236,7 @@ class Config:
                     if test.auth
                     else "default"
                 )
-                LOG.info(f"config.py in get_regions {self.project.role_name}")
+                LOG.info(f"config.py in get_regions {self.config.project.role_name}")
 
                 region_objects[test_name][region] = RegionObj(
                     name=region,
