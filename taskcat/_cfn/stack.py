@@ -208,6 +208,9 @@ class Stack:  # pylint: disable=too-many-instance-attributes
         self.client: boto3.client = region.client("cloudformation")
         self.completion_time: timedelta = timedelta(0)
         self.role_arn = region.role_arn
+        LOG.info(
+            f"bring out your dead!"
+        )
 
         # properties from additional cfn api calls
         self._events: Events = Events()
@@ -315,6 +318,9 @@ class Stack:  # pylint: disable=too-many-instance-attributes
             "Tags": tags,
             "Capabilities": Capabilities.ALL,
         }
+        LOG.info(
+            f"bring out your dead!"
+        )
         if region.role_arn:
             create_options["RoleARN"] = region.role_arn
             LOG.warning(
