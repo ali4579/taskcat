@@ -236,7 +236,7 @@ class Config:
                     if test.auth
                     else "default"
                 )
-                LOG.info(f"config.py in get_regions {test.role_name}")
+                LOG.info(f"config.py in get_regions {self.project.role_name}")
 
                 region_objects[test_name][region] = RegionObj(
                     name=region,
@@ -245,8 +245,8 @@ class Config:
                     profile=profile,
                     _boto3_cache=boto3_cache,
                     taskcat_id=self.uid,
-                    _role_name=test.role_name,
-                    _role_arn=test.role_arn,
+                    _role_name=self.project.role_name,
+                    _role_arn=self.project.role_arn,
                 )
 
         LOG.info(f"config.py in get_regions {region_objects}")
