@@ -50,6 +50,7 @@ class Config:
         self.uid = uid
         for source in sources:
             config_dict: dict = source["config"]
+            LOG.info(f"printing config {config_dict}")
             source_name: str = source["source"]
             source_config = BaseConfig.from_dict(config_dict)
             source_config.set_source(source_name)
