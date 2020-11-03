@@ -224,6 +224,7 @@ class Config:
     def get_regions(self, boto3_cache: Boto3Cache = None):
         if boto3_cache is None:
             boto3_cache = Boto3Cache()
+        LOG.info(f"starting get regions {self.config}")
 
         region_objects: Dict[str, Dict[str, RegionObj]] = {}
         for test_name, test in self.config.tests.items():
@@ -235,7 +236,7 @@ class Config:
                     if test.auth
                     else "default"
                 )
-                LOG.info(f"in get_regions {test.role_name}")
+                LOG.info(f"config.py in get_regions {test.role_name}")
 
                 region_objects[test_name][region] = RegionObj(
                     name=region,
