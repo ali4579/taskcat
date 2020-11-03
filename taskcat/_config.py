@@ -246,8 +246,9 @@ class Config:
                     _boto3_cache=boto3_cache,
                     taskcat_id=self.uid,
                     _role_name=test.role_name,
-                    _role_arn=test.role_arn,
                 )
+                LOG.info(f"config.py in get_regions {region_objects[test_name][region]._role_name}")
+
         return region_objects
 
     def get_buckets(self, boto3_cache: Boto3Cache = None):
