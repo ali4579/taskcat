@@ -126,7 +126,7 @@ class Boto3Cache:
 
     def _cache_lookup(self, cache, key_list, create_func, args=None, kwargs=None):
         try:
-            LOG.info ( "keylist is {key_list}" )
+            LOG.info ( f"in cache_lookup keylist is {key_list}" )
             value = self._cache_get(cache, key_list)
         except KeyError:
             args = [] if not args else args
