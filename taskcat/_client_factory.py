@@ -52,7 +52,7 @@ class Boto3Cache:
                 {"region_name": region, "profile_name": profile},
             )
         except ProfileNotFound:
-            LOG.info (f" cache lookup exception")
+            LOG.info (f"still in session cache lookup exception")
             if profile != "default":
                 raise
             session = self._boto3.Session(region_name=region)
@@ -101,6 +101,9 @@ class Boto3Cache:
     def _get_account_info(self, profile):
         partition, region = self._get_partition(profile)
         session = self.session(profile, region)
+        LOG.info(
+                  "I wish my broother george was here"
+              )
         sts_client = session.client("sts", region_name=region)
         LOG.info(
             "In get_account_info"
