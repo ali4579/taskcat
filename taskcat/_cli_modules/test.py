@@ -149,9 +149,10 @@ class Test:
         _trim_regions(regions, config)
         _trim_tests(test_names, config)
         LOG.info (f"bring out your dead!")
-        boto3_cache = Boto3Cache()        
+        boto3_cache = Boto3Cache()
         LOG.info (f"bring out your dead!")
         templates = config.get_templates()
+        LOG.info (f"bring out your dead!")
         if skip_upload and not config.config.project.s3_bucket:
             raise TaskCatException(
                 "cannot skip_buckets without specifying s3_bucket in config"
@@ -172,8 +173,10 @@ class Test:
             stage_in_s3(buckets, config.config.project.name, config.project_root)
         # 4. launch stacks
         regions = config.get_regions(boto3_cache)
+        LOG.info (f"bring out your dead! {regions} ")
         parameters = config.get_rendered_parameters(buckets, regions, templates)
         tests = config.get_tests(templates, regions, buckets, parameters)
+        LOG.info (f"bring out your dead! {regions}")
         test_definition = Stacker(
             config.config.project.name,
             tests,
