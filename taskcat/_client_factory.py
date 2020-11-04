@@ -38,6 +38,7 @@ class Boto3Cache:
         profile = "default"
         LOG.info (f"in session, region is {region} and profile is {profile}")
         try:
+            LOG.info (f"trying cache lookup")
             session = self._cache_lookup(
                 self._session_cache,
                 [profile, region],
@@ -46,6 +47,7 @@ class Boto3Cache:
                 {"region_name": region, "profile_name": profile},
             )
         except ProfileNotFound:
+            LOG.info (f" cache lookup exception")
             if profile != "default":
                 raise
             session = self._boto3.Session(region_name=region)
