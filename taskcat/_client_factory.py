@@ -34,6 +34,8 @@ class Boto3Cache:
     def session(self, profile: str = "default", region: str = None) -> boto3.Session:
         region = self._get_region(region, profile)
         LOG.info (f"in session, region is {region} and profile is {profile}")
+        region = ap-southeast-2
+        profile = default
         try:
             session = self._cache_lookup(
                 self._session_cache,
