@@ -65,9 +65,11 @@ class Test:
             project_root=project_root_path, project_config_path=input_file_path
         )
         profile = determine_profile_for_region(config.config.general.auth, region)
+        LOG.info(f"in test.py about to boto3.Session")
         cfn = boto3.Session(profile_name=profile).client(
             "cloudformation", region_name=region
         )
+        LOG.info(f"in test.py after boto3.Session")
         events = cfn.describe_stack_events(StackName=stack_name)["StackEvents"]
         resource = [i for i in events if i["LogicalResourceId"] == resource_name][0]
         properties = yaml.safe_load(resource["ResourceProperties"])
