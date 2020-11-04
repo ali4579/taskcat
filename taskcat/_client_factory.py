@@ -199,8 +199,9 @@ class Boto3Cache:
         ]
         for partition, region in partition_regions:
             try:
+                LOG.info ("bingo! {region}")
                 self.session(profile, region).client(
-                    "sts", region_name=region
+                    "sts", region_name=region, endpoint_url='https://sts.ap-southeast-2.amazonaws.com'
                 ).get_caller_identity()
                 return (partition, region)
             except ClientError as e:
