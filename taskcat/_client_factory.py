@@ -143,6 +143,7 @@ class Boto3Cache:
             value = self._get_with_retry(create_func, args, kwargs)
             LOG.info ( f"in cache_lookup except" )
             self._cache_set(cache, key_list, value)
+            LOG.info ( f"in cache_lookup except" )
         return value
 
     def _get_with_retry(self, create_func, args, kwargs):
