@@ -91,7 +91,7 @@ class Boto3Cache:
         session = self.session(profile, region)
         sts_client = session.client("sts", region_name=region)
         LOG.info(
-            "STS{region_name}"
+            "In get_account_info"
         )
 
         try:
@@ -126,6 +126,7 @@ class Boto3Cache:
 
     def _cache_lookup(self, cache, key_list, create_func, args=None, kwargs=None):
         try:
+            LOG.info ( "keylist is {key_list}" )
             value = self._cache_get(cache, key_list)
         except KeyError:
             args = [] if not args else args
