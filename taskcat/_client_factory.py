@@ -53,6 +53,7 @@ class Boto3Cache:
         self, service: str, profile: str = "default", region: str = None
     ) -> boto3.client:
         region = self._get_region(region, profile)
+        LOG.info (f"in client, region is {region} and profile is {profile}")
         session = self.session(profile, region)
         kwargs = {"config": BotoConfig(retries={"max_attempts": 20})}
         if service in REGIONAL_ENDPOINT_SERVICES:
