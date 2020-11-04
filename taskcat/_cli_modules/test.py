@@ -137,6 +137,8 @@ class Test:
         project_root_path: Path = Path(project_root).expanduser().resolve()
         input_file_path: Path = project_root_path / input_file
         # pylint: disable=too-many-arguments
+        
+        LOG.info(f"in run. GLOBAL_ARGS.profile is {GLOBAL_ARGS.profile}")
         args = _build_args(enable_sig_v2, regions, GLOBAL_ARGS.profile)
         config = Config.create(
             project_root=project_root_path,
@@ -146,7 +148,9 @@ class Test:
         )
         _trim_regions(regions, config)
         _trim_tests(test_names, config)
-        boto3_cache = Boto3Cache()
+        LOG.info (f"bring out your dead!")
+        boto3_cache = Boto3Cache()        
+        LOG.info (f"bring out your dead!")
         templates = config.get_templates()
         if skip_upload and not config.config.project.s3_bucket:
             raise TaskCatException(
