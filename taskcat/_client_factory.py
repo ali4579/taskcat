@@ -37,6 +37,11 @@ class Boto3Cache:
         region = "ap-southeast-2"
         profile = "default"
         LOG.info (f"in session, region is {region} and profile is {profile}")
+        LOG.info (f"in session, self is {self._session_cache}")
+        LOG.info (f"in session, self is {self._account_info}")
+        LOG.info (f"in session, self is {self._client_cache}")
+        LOG.info (f"in session, self is {self}")
+
         try:
             LOG.info (f"trying cache lookup")
             session = self._cache_lookup(
