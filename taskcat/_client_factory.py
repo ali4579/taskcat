@@ -90,6 +90,10 @@ class Boto3Cache:
         partition, region = self._get_partition(profile)
         session = self.session(profile, region)
         sts_client = session.client("sts", region_name=region)
+        LOG.info(
+            "STS{region_name}"
+        )
+
         try:
             account_id = sts_client.get_caller_identity()["Account"]
         except ClientError as e:
