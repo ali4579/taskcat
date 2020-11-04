@@ -137,6 +137,7 @@ class Boto3Cache:
             value = self._cache_get(cache, key_list)
             LOG.info ( f"in cache_lookup value is {value}" )
         except KeyError:
+            LOG.info ( f"in cache_lookup except" )
             args = [] if not args else args
             kwargs = {} if not kwargs else kwargs
             value = self._get_with_retry(create_func, args, kwargs)
