@@ -237,6 +237,7 @@ class Config:
                     else "default"
                 )
                 LOG.info(f"config.py in get_regions {self.config.project.role_name}")
+                LOG.info(f"config.py in get_regions {region}, {profile}, {boto3_cache.account_id(profile)")
 
                 region_objects[test_name][region] = RegionObj(
                     name=region,
