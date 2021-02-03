@@ -72,7 +72,10 @@ METADATA = {
         "description": "Shorten stack names generated for tests, set to true to enable"
     },
     "role_name": {"description": "Role name to use when launching CFN Stacks."},
-    "role_arn": {"description": "Role arn to use when launching CFN Stacks."},
+    "prehooks": {"description": "hooks to execute prior to executing tests"},
+    "posthooks": {"description": "hooks to execute after executing tests"},
+    "type": {"description": "hook type"},
+    "config": {"description": "hook configuration"},
 }
 
 # types
@@ -420,6 +423,14 @@ class TestObj:
 
 
 @dataclass
+class HookData(JsonSchemaMixin, allow_additional_props=False):  # type: ignore
+    """Hook definition"""
+
+    type: Optional[str] = field(default=None, metadata=METADATA["type"])
+    config: Optional[Dict[str, Any]] = field(default=None, metadata=METADATA["config"])
+
+
+@dataclass
 class GeneralConfig(JsonSchemaMixin, allow_additional_props=False):  # type: ignore
     """General configuration settings."""
 
@@ -433,6 +444,13 @@ class GeneralConfig(JsonSchemaMixin, allow_additional_props=False):  # type: ign
     s3_bucket: Optional[str] = field(default=None, metadata=METADATA["s3_bucket"])
     s3_regional_buckets: Optional[bool] = field(
         default=None, metadata=METADATA["s3_regional_buckets"]
+    )
+    regions: Optional[List[Region]] = field(default=None, metadata=METADATA["regions"])
+    prehooks: Optional[List[HookData]] = field(
+        default=None, metadata=METADATA["prehooks"]
+    )
+    posthooks: Optional[List[HookData]] = field(
+        default=None, metadata=METADATA["posthooks"]
     )
 
 
@@ -459,9 +477,12 @@ class TestConfig(JsonSchemaMixin, allow_additional_props=False):  # type: ignore
         default=None, metadata=METADATA["az_ids"]
     )
     role_name: Optional[str] = field(default=None, metadata=METADATA["role_name"])
-    role_arn: Optional[str] = field(default=None, metadata=METADATA["role_arn"])
-
-
+    prehooks: Optional[List[HookData]] = field(
+        default=None, metadata=METADATA["prehooks"]
+    )
+    posthooks: Optional[List[HookData]] = field(
+        default=None, metadata=METADATA["posthooks"]
+    )
 
 # pylint: disable=too-many-instance-attributes
 @dataclass
@@ -512,9 +533,12 @@ class ProjectConfig(JsonSchemaMixin, allow_additional_props=False):  # type: ign
         default=None, metadata=METADATA["shorten_stack_name"]
     )
     role_name: Optional[str] = field(default=None, metadata=METADATA["role_name"])
-    role_arn: Optional[str] = field(default=None, metadata=METADATA["role_arn"])
-
-
+    prehooks: Optional[List[HookData]] = field(
+        default=None, metadata=METADATA["prehooks"]
+    )
+    posthooks: Optional[List[HookData]] = field(
+        default=None, metadata=METADATA["posthooks"]
+    )
 
 PROPAGATE_KEYS = ["tags", "parameters", "auth"]
 PROPOGATE_ITEMS = [
@@ -523,6 +547,8 @@ PROPOGATE_ITEMS = [
     "template",
     "az_blacklist",
     "s3_regional_buckets",
+    "prehooks",
+    "posthooks",
 ]
 
 

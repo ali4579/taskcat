@@ -1,5 +1,5 @@
 # taskcat
-[![Build Status](https://travis-ci.org/aws-quickstart/taskcat.svg?branch=master)](https://travis-ci.org/aws-quickstart/taskcat)
+[![Build Status](https://travis-ci.com/aws-quickstart/taskcat.svg?branch=main)](https://travis-ci.com/aws-quickstart/taskcat)
 [![PyPI version](https://badge.fury.io/py/taskcat.svg)](https://badge.fury.io/py/taskcat)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -90,6 +90,35 @@ taskcat test run
 ```
 
 add `--help to see the supported flags and arguments`
+
+### Python
+Taskcat can be imported into Python and used in the testing framework of your choice.
+```python
+from taskcat.testing import CFNTest
+
+test = CFNTest.from_file(project_root='./template_dir')
+
+with test as stacks:
+    # Calling 'with' or 'test.run()' will deploy the stacks.
+    for stack in stacks:
+        print(f"Testing {stack.name}")
+
+        bucket_name = ""
+
+        for output in stack.outputs:
+
+            if output.key == "LogsBucketName":
+                bucket_name = output.value
+                break
+
+        assert "logs" in bucket_name
+
+        assert stack.region.name in bucket_name
+
+        print(f"Created bucket: {bucket_name}")
+```
+
+The example used here is very simple, you would most likely leverage other python modules like boto3 to do more advanced testing. The `CFNTest` object can be passed the same arguments as `taskcat test run`. See the [docs](https://aws-quickstart.github.io/taskcat/apidocs/taskcat/testing/index.html) for more details.
 
 ### Config files
 taskcat has several configuration files which can be used to set behaviors in a flexible way.
@@ -270,6 +299,10 @@ or run it from anywhere by providing the path to the project root
 ```bash
 taskcat test run -p ./quickstart-aws-vpc
 ```
+
+### Non-standard credentials
+
+Taskcat leverages the credential mechanisms of the AWS CLI, with the exception of environment variables. To integrate advanced credential handling (such as AWS SSO), [please see issue #596 for an example]( https://github.com/aws-quickstart/taskcat/issues/596)
 
 ### Configuration files
 The configuration files required for taskcat have changed, to ease migration, if taskcat
