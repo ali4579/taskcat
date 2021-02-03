@@ -57,8 +57,9 @@ class Test:
             project_root=project_root_path, project_config_path=input_file_path
         )
         profile = determine_profile_for_region(config.config.general.auth, region)
+##Added by Alison Lynton - SCP's prevent us from logging in unless we use a regional sts endpoint ###
         cfn = boto3.Session(profile_name=profile).client(
-            "cloudformation", region_name=region
+            "cloudformation", region_name=region, endpoint_url='endpoint_url='https://sts.ap-southeast-2.amazonaws.com'
         )
         events = cfn.describe_stack_events(StackName=stack_name)["StackEvents"]
         resource = [i for i in events if i["LogicalResourceId"] == resource_name][0]

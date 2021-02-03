@@ -241,7 +241,9 @@ class Config:
                     profile=profile,
                     _boto3_cache=boto3_cache,
                     taskcat_id=self.uid,
-                    _role_name=test.role_name,
+# Alison Lynton test.role_name doesn't seem to work. If I change it to self.config.project.role_name, it does. I'm sure this isn't the right thing to do but I'm doing it for now
+#                    _role_name=test.role_name,
+		     _role_name=self.config.project.role_name,
                 )
         return region_objects
 
