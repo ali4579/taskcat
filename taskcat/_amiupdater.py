@@ -291,7 +291,7 @@ class AMIUpdater:
     )
     upstream_config_file_url = (
         "https://raw.githubusercontent.com/aws-quickstart/"
-        "taskcat/master/cfg/amiupdater.cfg.yml"
+        "taskcat/main/cfg/amiupdater.cfg.yml"
     )
 
     def __init__(self, config, user_config_file=None, use_upstream_mappings=True):
@@ -334,6 +334,7 @@ class AMIUpdater:
                 profile=profile,
                 _boto3_cache=self.boto3_cache,
                 taskcat_id=self.config.uid,
+                _role_name=None,
             )
         return regions
 
