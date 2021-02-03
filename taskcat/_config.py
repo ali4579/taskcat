@@ -241,7 +241,9 @@ class Config:
                     profile=profile,
                     _boto3_cache=boto3_cache,
                     taskcat_id=self.uid,
-                    _role_name=test.role_name,
+# Changed by Alison to get it to work for Curtin
+                    #_role_name=test.role_name,
+                    _role_name=self.config.project.role_name,
                 )
         return region_objects
 
