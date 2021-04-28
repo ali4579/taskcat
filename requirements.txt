@@ -6,7 +6,7 @@ setuptools>=40.4.3
 boto3>=1.9.21,<2.0
 botocore>=1.12.21,<2.0
 yattag>=1.10.0,<2.0
-PyYAML~=5.1
+PyYAML~=5.4
 jinja2>=2.10.0,<3.0
 requests>2.17.0
 jsonschema~=3.0
